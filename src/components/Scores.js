@@ -52,9 +52,8 @@ function Scores({ setStep, setScore }) {
           </TableBody>
         </Table>
       </TableContainer>
-      <Button sx={{ margin: '1rem'}}variant='outlined' onClick={handleNewGame}>New Game</Button>
+      <Button sx={{ margin: '1rem' }} variant='outlined' onClick={handleNewGame}>New Game</Button>
     </div>
-
   );
 }
 
