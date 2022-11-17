@@ -1,30 +1,26 @@
 import React from 'react';
+import User from './components/User';
 import Game from './components/Game';
+import End from './components/End';
+import Scores from './components/Scores';
 import './App.css';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 
 function App() {
   const [name, setName] = React.useState('');
-  const [inGame, setInGame] = React.useState(false);
+  const [step, setStep] = React.useState(0);
+  const [score, setScore] = React.useState(0);
 
-  const handleEnter = e => {
-    if (e.key === 'Enter') setInGame(true);
+  const setComponent = () => {
+    if (step === 0) return <User setName={setName} setStep={setStep} setScore={setScore}/>
+    else if (step === 1) return <Game score={score} setScore={setScore} name={name} setStep={setStep}/>
+    else if (step === 2) return <End name={name} score={score} setStep={setStep} setScore={setScore}/>
+    else if (step === 3) return <Scores setStep={setStep} setScore={setScore}/>
   }
 
   return (
     <div className="App">
-      <Typography sx={{ position: 'absolute', top: 20}}variant='h3'>Quick Maths</Typography>
-      {inGame === false ?
-        <>
-          <Container sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <TextField label='Enter your name' variant='outlined' onKeyDown={handleEnter} onChange={e => setName(e.target.value)} />
-            <Button sx={{ marginLeft: '1rem' }} variant='outlined' onClick={() => setInGame(true)}>Submit</Button>
-          </Container>
-        </>
-        : <Game name={name} setInGame={setInGame} />}
+      {setComponent()}
+      
     </div>
   );
 }
